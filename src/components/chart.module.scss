@@ -1,0 +1,12 @@
+div.settings{
+    margin: 0;
+    padding: 0.5rem 0.5rem;
+}
+div.ChartContainer{
+    overflow-x: scroll;
+    display: flex;
+    align-items:start;
+    div.chart{
+        margin: 1rem;
+    }
+}
