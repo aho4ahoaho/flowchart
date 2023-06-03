@@ -12,3 +12,13 @@ export const supportSystemChecker = (): supportSystemType => {
 		return "other";
 	}
 };
+
+type supportDeviceType = "mobile" | "desktop" | "tablet";
+export const supportDeviceChecker = (): supportDeviceType => {
+	if (window.innerWidth < 600) {
+		return "mobile";
+	} else if (window.innerWidth < 1280) {
+		return "tablet";
+	}
+	return "desktop";
+}
