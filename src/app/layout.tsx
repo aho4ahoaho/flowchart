@@ -1,23 +1,23 @@
 import { Header } from "../components/header";
 
-import "normalize.css";
 import "./globals.css";
+import "normalize.css";
 
 export const metadata = {
-	title: "FlowChartGenerator",
+    title: "FlowChartGenerator",
 };
 
 export default function RootLayout({
-	children,
+    children,
 }: {
-	children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-	return (
-		<html lang="ja">
-			<body>
-				<Header />
-				{children}
-			</body>
-		</html>
-	);
+    return (
+        <html lang="ja">
+            <body>
+                <Header />
+                {children}
+            </body>
+        </html>
+    );
 }
