@@ -67,6 +67,7 @@ export const TextEditor = ({ className, value, setValue }: Props) => {
 			<p ref={dummyRef} className={style.dummy}>
 				{value + " "}
 			</p>
+			<div className={style.editorContainer}>
 			<textarea
 				className={style.editor}
 				value={value}
@@ -77,6 +78,7 @@ export const TextEditor = ({ className, value, setValue }: Props) => {
 				onKeyDown={keyboardHandler}
 				autoFocus
 			></textarea>
+			</div>
 			<CodeManager value={value} setValue={setValue}></CodeManager>
 		</div>
 	);
