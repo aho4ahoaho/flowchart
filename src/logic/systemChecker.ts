@@ -21,4 +21,4 @@ export const supportDeviceChecker = (): supportDeviceType => {
 		return "tablet";
 	}
 	return "desktop";
-}
+};

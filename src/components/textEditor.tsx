@@ -68,16 +68,16 @@ export const TextEditor = ({ className, value, setValue }: Props) => {
 				{value + " "}
 			</p>
 			<div className={style.editorContainer}>
-			<textarea
-				className={style.editor}
-				value={value}
-				onChange={(e) => {
-					setValue?.(e.target.value);
-				}}
-				ref={textareaRef}
-				onKeyDown={keyboardHandler}
-				autoFocus
-			></textarea>
+				<textarea
+					className={style.editor}
+					value={value}
+					onChange={(e) => {
+						setValue?.(e.target.value);
+					}}
+					ref={textareaRef}
+					onKeyDown={keyboardHandler}
+					autoFocus
+				></textarea>
 			</div>
 			<CodeManager value={value} setValue={setValue}></CodeManager>
 		</div>

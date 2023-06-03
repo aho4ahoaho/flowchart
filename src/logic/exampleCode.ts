@@ -1,6 +1,6 @@
 export const example_code = `fn main(){
     ここに処理を書く;
-}`
+}`;
 
 export const example_code1 = `fn main(){
     こういう処理とか;
@@ -19,4 +19,4 @@ export const example_code1 = `fn main(){
 
 fn sub(){
     サブルーチンの処理;
-}`
+}`;
