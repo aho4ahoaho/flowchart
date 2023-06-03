@@ -1,0 +1,16 @@
+{
+    "formatter": {
+        "enabled": true,
+        "ignore": [
+            "node_modules",
+            "*.min.js"
+        ],
+        "indentStyle": "space",
+        "indentSize": 4
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "double"
+        }
+    }
+}
