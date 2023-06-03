@@ -1,39 +1,46 @@
 {
-  "name": "flowchart",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "lint:fix":"eslint src --fix",
-    "analyze": "rome check --apply-unsafe ./src",
-    "fmt": "rome format --write ./src",
-    "prepare": "husky install"
-  },
-  "dependencies": {
-    "@types/node": "20.2.5",
-    "@types/react": "18.2.7",
-    "@types/react-dom": "18.2.4",
-    "eslint": "8.41.0",
-    "eslint-config-next": "13.4.4",
-    "next": "13.4.4",
-    "normalize.css": "^8.0.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-select": "^5.7.3",
-    "typescript": "5.0.4"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.59.8",
-    "@typescript-eslint/parser": "^5.59.8",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-unused-imports": "^2.0.0",
-    "husky": "^8.0.3",
-    "rome": "^12.1.3",
-    "sass": "^1.62.1"
-  }
+    "name": "flowchart",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "lint:fix": "eslint src --fix",
+        "lint:staged": "lint-staged",
+        "analyze": "rome check --apply-unsafe ./src",
+        "fmt": "rome format --write ./src",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "src/**/*.{js,jsx,ts,tsx}": ["eslint --fix", "rome format --write"],
+        "./*.json": ["rome format --write"],
+        "src/**/*.json": ["rome format --write"]
+    },
+    "dependencies": {
+        "@types/node": "20.2.5",
+        "@types/react": "18.2.7",
+        "@types/react-dom": "18.2.4",
+        "eslint": "8.41.0",
+        "eslint-config-next": "13.4.4",
+        "next": "13.4.4",
+        "normalize.css": "^8.0.1",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-select": "^5.7.3",
+        "typescript": "5.0.4"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.59.8",
+        "@typescript-eslint/parser": "^5.59.8",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-import-resolver-typescript": "^3.5.5",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-unused-imports": "^2.0.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^13.2.2",
+        "rome": "^12.1.3",
+        "sass": "^1.62.1"
+    }
 }
