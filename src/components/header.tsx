@@ -1,6 +1,4 @@
-import menuSvg from "../assets/menu.svg";
 import style from "./header.module.scss";
-import Image from "next/image";
 import Link from "next/link";
 
 export const Header = () => {
@@ -9,9 +7,7 @@ export const Header = () => {
             <Link href="/">
                 <h1>My</h1>
             </Link>
-            <div className={style.menu}>
-                <Image src={menuSvg} alt="menu" />
-            </div>
+            <div className={style.menu}></div>
         </header>
     );
 };
