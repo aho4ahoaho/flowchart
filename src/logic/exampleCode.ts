@@ -1,4 +1,8 @@
-fn main(){
+export const example_code = `fn main(){
+    ここに処理を書く;
+}`
+
+export const example_code1 = `fn main(){
     こういう処理とか;
     if(こういう条件){
         こんな処理;
@@ -15,4 +19,4 @@ fn main(){
 
 fn sub(){
     サブルーチンの処理;
-}
+}`
