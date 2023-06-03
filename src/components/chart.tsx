@@ -6,12 +6,12 @@ import {
     chartGenerator,
     chartGeneratorTest,
 } from "@/logic/chartGenerator";
-import { Function } from "@/logic/scope";
+import { FunctionItem } from "@/logic/scope";
 import React from "react";
 
 type Props = {
     className?: string;
-    functions: Function[];
+    functions: FunctionItem[];
 };
 
 const defaultChartGenOption: ChartGeneratorOption = {
@@ -78,7 +78,7 @@ export const ChartContainer = (props: Props) => {
 
 export const Chart = (props: {
     className?: string;
-    function: Function;
+    function: FunctionItem;
     option: ChartGeneratorOption;
     chartStyle?: ChartStyle;
 }) => {

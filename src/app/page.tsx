@@ -5,12 +5,12 @@ import style from "./rootPage.module.scss";
 import { ChartContainer } from "@/components/chart";
 import { example_code } from "@/logic/exampleCode";
 import { Parser } from "@/logic/parser";
-import { Function } from "@/logic/scope";
+import { FunctionItem } from "@/logic/scope";
 import React from "react";
 
 export default function RootPage() {
     const [text, setText] = React.useState("");
-    const [functions, setFunctions] = React.useState<Function[]>([]);
+    const [functions, setFunctions] = React.useState<FunctionItem[]>([]);
 
     React.useEffect(() => {
         setText(example_code);

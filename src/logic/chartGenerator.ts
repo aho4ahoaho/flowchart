@@ -1,6 +1,6 @@
-import { Function, Item } from "./scope";
+import { FunctionItem, Item } from "./scope";
 
-export const chartGeneratorTest = (func: Function) => {
+export const chartGeneratorTest = (func: FunctionItem) => {
     let step = 1;
     let nest = 0;
     let max_nest = 0;
@@ -45,7 +45,7 @@ export type ChartGeneratorOption = {
 // チャートを描画する
 export const chartGenerator = (
     ctx: CanvasRenderingContext2D,
-    func: Function,
+    func: FunctionItem,
     Option?: Partial<ChartGeneratorOption>,
     style?: Partial<ChartStyle>,
 ) => {

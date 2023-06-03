@@ -1,8 +1,8 @@
-import { Function, searchScopeEnd, searchSentence } from "./scope";
+import { FunctionItem, searchScopeEnd, searchSentence } from "./scope";
 
 export class Parser {
     private context = "";
-    private functions: Function[] = [];
+    private functions: FunctionItem[] = [];
     constructor(context = "") {
         if (context !== "") {
             this.setContext(context);
@@ -11,7 +11,7 @@ export class Parser {
 
     static parse(context: string) {
         //全ての関数を取得
-        const functions: Function[] = [
+        const functions: FunctionItem[] = [
             ...context.matchAll(/fn \w*?\(\)\{/g),
         ].map((f) => {
             //関数名を取得
@@ -22,7 +22,7 @@ export class Parser {
             //関数の開始位置を取得
             const index = context.indexOf("{", f.index);
             //関数オブジェクトを作成
-            const newFunction: Function = {
+            const newFunction: FunctionItem = {
                 name: name,
                 index: index,
                 end: searchScopeEnd(context, index),
@@ -57,7 +57,7 @@ export class Parser {
         return this.functions;
     }
 
-    static view(functions: Function[]) {
+    static view(functions: FunctionItem[]) {
         functions.forEach((f) => {
             console.log("====================================");
             console.log(f);

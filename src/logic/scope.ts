@@ -1,4 +1,4 @@
-export type Function = {
+export type FunctionItem = {
     name: string;
     index: number;
     end: number;

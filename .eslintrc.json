@@ -20,8 +20,7 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
-    "import/no-named-as-default-member": "off",
-    "@typescript-eslint/ban-types": "off"
+    "import/no-named-as-default-member": "off"
   },
   "settings": {
     "import/parsers": {
