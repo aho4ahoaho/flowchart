@@ -123,7 +123,7 @@ export const SettingsPanel = (props: Props) => {
         const os = supportSystemChecker();
         let font = [...FontFamilyList];
         if (os === "windows") {
-            console.log("windows");
+            console.info("windows");
             font = [...font, ...WindowsFontFamilyList.sort()];
         }
         setFontOption(
