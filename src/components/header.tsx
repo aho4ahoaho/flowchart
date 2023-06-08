@@ -5,7 +5,8 @@ export const Header = () => {
     return (
         <header className={style.header}>
             <Link href="/">
-                <h1>My</h1>
+                <p>FlowChart</p>
+                <p>Generator</p>
             </Link>
             <div className={style.menu}></div>
         </header>
