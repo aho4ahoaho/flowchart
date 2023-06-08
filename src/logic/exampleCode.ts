@@ -1,5 +1,13 @@
 export const example_code = `fn main(){
     ここに処理を書く;
+    if(条件式){
+        分岐処理;
+        loop(継続条件){
+            繰り返し処理;
+        }
+    }else{
+        その他の場合;
+    }
 }`;
 
 export const example_code1 = `fn main(){
