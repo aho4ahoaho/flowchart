@@ -189,7 +189,7 @@ export const SettingsPanel = (props: Props) => {
             </div>
             <div className={style.func_button}>
                 <span />
-                <Button onClick={onClickDownload}>ダウソロード</Button>
+                <Button onClick={onClickDownload}>ダウンロード</Button>
                 <span />
             </div>
         </div>
