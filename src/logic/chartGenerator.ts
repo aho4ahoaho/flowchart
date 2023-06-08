@@ -23,6 +23,7 @@ export const chartGeneratorTest = (func: FunctionItem) => {
                 }
             } else if (node.type === "loop") {
                 nodeProcesser(node.node);
+                max_nest = Math.max(max_nest, nest + 1);
                 step++;
             }
         });
