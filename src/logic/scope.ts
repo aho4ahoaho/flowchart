@@ -94,7 +94,7 @@ export const searchSentence = (context: string): Item[] => {
             const endIndex = searchScopeEnd(context, startIndex);
             if (startIndex !== -1 && endIndex !== -1) {
                 // loop文の情報をnodesに追加
-                nodes.push({
+                const node: Scope = {
                     type: "loop",
                     condition: context.substring(
                         i + 5,
@@ -103,7 +103,8 @@ export const searchSentence = (context: string): Item[] => {
                     node: searchSentence(
                         context.substring(startIndex + 1, endIndex + 1),
                     ),
-                } as Scope);
+                };
+                nodes.push(node);
 
                 // 処理した範囲をcontextから削除
                 context = context.substring(endIndex + 1).trim();

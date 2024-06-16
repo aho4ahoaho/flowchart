@@ -4,7 +4,7 @@ import { TextEditor } from "../components/textEditor";
 import style from "./rootPage.module.scss";
 import { ChartContainer } from "@/components/chart";
 import { example_code } from "@/logic/exampleCode";
-import { Parser } from "@/logic/parser";
+import { codeParser } from "@/logic/parser";
 import { FunctionItem } from "@/logic/scope";
 import React from "react";
 
@@ -17,7 +17,7 @@ export default function RootPage() {
     }, []);
 
     React.useEffect(() => {
-        const f = Parser.parse(text);
+        const f = codeParser(text);
         setFunctions(f);
     }, [text]);
     return (
