@@ -10,6 +10,10 @@ export const example_code = `fn main(){
     }else{
         その他の場合;
     }
+}
+
+fn sub(int a, int b){
+    サブルーチンの処理;
 }`;
 
 export const example_code1 = `fn main(){
