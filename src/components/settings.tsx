@@ -121,9 +121,8 @@ export const SettingsPanel = (props: Props) => {
 
     React.useEffect(() => {
         const os = supportSystemChecker();
-        let font = [...FontFamilyList];
+        let font = FontFamilyList;
         if (os === "windows") {
-            console.info("windows");
             font = [...font, ...WindowsFontFamilyList.sort()];
         }
         setFontOption(
