@@ -26,7 +26,8 @@ export const chartGeneratorTest = (func: FunctionItem) => {
                 }
             } else if (node.type === "loop") {
                 nodeProcesser(node.node);
-                max_nest = Math.max(max_nest, nest + 1);
+                const blockNest = nestCount(node.node);
+                max_nest = Math.max(max_nest, nest + 1 + blockNest);
                 step++;
             }
         });
@@ -244,9 +245,14 @@ export const chartGenerator = (
                 );
                 chart.desicion(x, y, size.width, size.height, node.condition);
                 (() => {
+                    const blockNest = nestCount(node.node);
                     const x0 = x + size.width;
                     const y0 = y + size.height / 2;
-                    const x1 = x0 + size.width / 2 + size.margin;
+                    const x1 =
+                        x0 +
+                        size.width / 2 +
+                        size.margin +
+                        (size.width + size.margin) * blockNest;
                     const y1 = y0;
                     const x2 = x1;
                     const y2 =
