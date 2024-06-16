@@ -92,9 +92,12 @@ export const Chart = (props: {
         const { width, height, margin, offset } = props.option;
         ref.current?.setAttribute(
             "width",
-            `${(nest + 1) * (width + margin)}px`,
+            `${(nest + 1) * width + nest * margin + 2 * offset.x}px`,
         );
-        ref.current?.setAttribute("height", `${step * (height + margin)}px`);
+        ref.current?.setAttribute(
+            "height",
+            `${step * height + (step - 1) * margin + 2 * offset.y}px`,
+        );
 
         //背景を塗る
         const ctx = ref.current?.getContext("2d");
