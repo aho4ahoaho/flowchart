@@ -8,6 +8,8 @@ type Props = {
     setValue?: (value: string) => void;
 };
 
+const indent = "    "; // 4 spaces
+
 const keyboardHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Tab") {
         e.preventDefault();
@@ -16,14 +18,15 @@ const keyboardHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         const endPos = textArea.selectionEnd;
         const context = textArea.value;
 
-        //選択がない場合
-        if (startPos === endPos) {
-            if (e.shiftKey) {
+        //Shift+TabとTabの処理を分ける
+        if (e.shiftKey) {
+            //選択がない場合
+            if (startPos === endPos) {
                 const after_context = context.substring(startPos);
                 const before_context = context.substring(0, startPos);
                 const before_lines = before_context.split("\n");
                 const before_line = before_lines.pop() ?? "";
-                if (before_line.substring(0, 4) === "    ") {
+                if (before_line.substring(0, 4) === indent) {
                     const new_before_context =
                         before_lines.join("\n") +
                         "\n" +
@@ -33,6 +36,29 @@ const keyboardHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
                     return;
                 }
             } else {
+                //範囲選択の場合
+                const before_context = context.substring(0, startPos - 1);
+                const after_context = context.substring(endPos);
+                let target_context = context.substring(startPos - 1, endPos);
+                const lines = target_context.split("\n" + indent);
+                target_context = (() => {
+                    const ctx = lines.join("\n");
+                    if (ctx.substring(0, 4) === indent) {
+                        return ctx.substring(4);
+                    }
+                    return ctx;
+                })();
+
+                textArea.value =
+                    before_context + target_context + after_context;
+                textArea.setSelectionRange(
+                    startPos,
+                    startPos + target_context.length - 1,
+                );
+            }
+        } else {
+            //選択がない場合
+            if (startPos === endPos) {
                 const newContext = `${context.substring(
                     0,
                     startPos,
@@ -40,31 +66,20 @@ const keyboardHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
                 textArea.value = newContext;
                 textArea.setSelectionRange(startPos + 4, startPos + 4);
                 return;
-            }
-        } else {
-            //範囲選択の場合
-            const before_context = context.substring(0, startPos - 1);
-            const after_context = context.substring(endPos);
-            let target_context = context.substring(startPos - 1, endPos);
-            target_context = (() => {
-                //シフトキーが押された場合
-                if (e.shiftKey) {
-                    const lines = target_context.split("\n    ");
-                    const ctx = lines.join("\n");
-                    if (ctx.substring(0, 4) === "    ") {
-                        return ctx.substring(4);
-                    }
-                    return ctx;
-                }
-                //シフトキーが押されていない場合
+            } else {
+                //範囲選択の場合
+                const before_context = context.substring(0, startPos - 1);
+                const after_context = context.substring(endPos);
+                let target_context = context.substring(startPos - 1, endPos);
                 const lines = target_context.split("\n");
-                return `    ${lines.join("\n    ")}`;
-            })();
-            textArea.value = before_context + target_context + after_context;
-            textArea.setSelectionRange(
-                startPos,
-                startPos + target_context.length,
-            );
+                target_context = `${lines.join("\n    ")}`;
+                textArea.value =
+                    before_context + target_context + after_context;
+                textArea.setSelectionRange(
+                    startPos,
+                    startPos + target_context.length - 1,
+                );
+            }
         }
     }
 };
