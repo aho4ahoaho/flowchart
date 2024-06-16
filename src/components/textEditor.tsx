@@ -112,7 +112,10 @@ export const TextEditor = ({ className, value, setValue }: Props) => {
                         setValue?.(e.target.value);
                     }}
                     ref={textareaRef}
-                    onKeyDown={keyboardHandler}
+                    onKeyDown={(e) => {
+                        keyboardHandler(e);
+                        setValue?.(e.currentTarget.value);
+                    }}
                 />
             </div>
             <CodeManager value={value} setValue={setValue} />
