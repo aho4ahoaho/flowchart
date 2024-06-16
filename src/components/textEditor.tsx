@@ -9,21 +9,40 @@ type Props = {
 };
 
 const keyboardHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.keyCode === 9) {
+    if (e.key === "Tab") {
         e.preventDefault();
         const textArea = e.currentTarget;
         const startPos = textArea.selectionStart;
         const endPos = textArea.selectionEnd;
-        let context = textArea.value;
+        const context = textArea.value;
+
         //選択がない場合
         if (startPos === endPos) {
-            context = `${context.substring(0, startPos)}    ${context.substring(
-                startPos,
-            )}`;
-            textArea.value = context;
-            textArea.setSelectionRange(startPos + 4, startPos + 4);
-            //範囲選択の場合
+            if (e.shiftKey) {
+                const after_context = context.substring(startPos);
+                const before_context = context.substring(0, startPos);
+                const before_lines = before_context.split("\n");
+                const before_line = before_lines.pop() ?? "";
+                if (before_line.substring(0, 4) === "    ") {
+                    const new_before_context =
+                        before_lines.join("\n") +
+                        "\n" +
+                        before_line.substring(4);
+                    textArea.value = new_before_context + after_context;
+                    textArea.setSelectionRange(startPos - 4, startPos - 4);
+                    return;
+                }
+            } else {
+                const newContext = `${context.substring(
+                    0,
+                    startPos,
+                )}    ${context.substring(startPos)}`;
+                textArea.value = newContext;
+                textArea.setSelectionRange(startPos + 4, startPos + 4);
+                return;
+            }
         } else {
+            //範囲選択の場合
             const before_context = context.substring(0, startPos - 1);
             const after_context = context.substring(endPos);
             let target_context = context.substring(startPos - 1, endPos);
@@ -41,8 +60,7 @@ const keyboardHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
                 const lines = target_context.split("\n");
                 return `    ${lines.join("\n    ")}`;
             })();
-            context = before_context + target_context + after_context;
-            textArea.value = context;
+            textArea.value = before_context + target_context + after_context;
             textArea.setSelectionRange(
                 startPos,
                 startPos + target_context.length,
