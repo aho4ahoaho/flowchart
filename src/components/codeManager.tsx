@@ -77,6 +77,7 @@ export const CodeManager = (props: Props) => {
         const data = codeList[loadName] as CodeData | undefined;
         if (data && props.setValue) {
             props.setValue(data.code);
+            setSaveName(loadName);
         }
     };
 
@@ -113,6 +114,7 @@ export const CodeManager = (props: Props) => {
                         onChange={(e) => {
                             setSaveName(e.target.value);
                         }}
+                        value={saveName}
                     />
                     <Button type="submit">QuickSave</Button>
                 </form>
