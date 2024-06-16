@@ -5,7 +5,7 @@ export const codeFormatter = (functions: FunctionItem[]) => {
 };
 
 const functionToText = (func: FunctionItem) => {
-    return `fn ${func.name}(){\n${func.node
+    return `fn ${func.name}(${func.args}){\n${func.node
         .map((node) => nodeToText(node, 1))
         .join("\n")}}`;
 };
