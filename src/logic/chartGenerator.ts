@@ -10,10 +10,13 @@ export const chartGeneratorTest = (func: FunctionItem) => {
                 step++;
             } else if (node.type === "if") {
                 const s = ++step;
-                nest++;
+                const elseNest = node.elseNode
+                    ? nestCount(node.elseNode) + 1
+                    : 1;
+                nest += elseNest;
                 nodeProcesser(node.node);
                 max_nest = Math.max(max_nest, nest);
-                nest--;
+                nest -= elseNest;
 
                 if (node.elseNode) {
                     const s1 = step;
@@ -131,11 +134,20 @@ export const chartGenerator = (
                     );
                 }
 
+                //else側のネストの深さを調べる
+                const elseNest = node.elseNode
+                    ? nestCount(node.elseNode) + 1
+                    : 1; //ネストは0から始まるので+1する
+
                 //Trueへの分岐線の描画
                 (() => {
                     const x0 = x + size.width;
                     const y0 = y + size.height / 2;
-                    const x1 = x0 + size.width / 2 + size.margin;
+                    const x1 =
+                        x0 +
+                        size.width / 2 +
+                        size.margin +
+                        (size.width + size.margin) * (elseNest - 1);
                     const y1 = y0;
                     const x2 = x1;
                     const y2 = y1 + size.height / 2 + size.margin;
@@ -150,10 +162,10 @@ export const chartGenerator = (
 
                 //現状を保存する
                 const s0 = ++step;
-                nest++;
+                nest += elseNest;
                 // 再帰的に描画する
                 nodeProcesser(node.node);
-                nest--;
+                nest -= elseNest;
 
                 //true側のStep
                 const s1 = step;
@@ -174,7 +186,10 @@ export const chartGenerator = (
                         (nest + 1) * (size.width + size.margin) + size.offset.x;
                     const y =
                         (s1 - 1) * (size.height + size.margin) + size.offset.y;
-                    const x0 = x + size.width / 2;
+                    const x0 =
+                        x +
+                        size.width / 2 +
+                        (size.width + size.margin) * (elseNest - 1);
                     const y0 = y + size.height;
                     const x1 = x0;
                     const y1 =
@@ -187,9 +202,11 @@ export const chartGenerator = (
                         size.width / 2;
                     const y2 = y1;
                     chart.preProcess();
+                    //下向きの線
                     ctx.moveTo(x0, y0);
                     ctx.lineTo(x1, y1);
                     chart.postProcess();
+                    //左向きの矢印
                     chart.arrow(x1, y1, x2, y2, "left");
                 })();
 
@@ -274,6 +291,30 @@ export const chartGenerator = (
         size.height,
         rname,
     );
+};
+
+const nestCount = (nodes: Item[]) => {
+    let nest = 0;
+    let max_nest = 0;
+    const nodeProcesser = (nodes: Item[]) => {
+        nodes.forEach((node, index) => {
+            if (typeof node === "string") {
+                //何もしない
+            } else if (node.type === "if") {
+                nest++;
+                nodeProcesser(node.node);
+                max_nest = Math.max(max_nest, nest);
+                nest--;
+                if (node.elseNode) {
+                    nodeProcesser(node.elseNode);
+                }
+            } else if (node.type === "loop") {
+                nodeProcesser(node.node);
+            }
+        });
+    };
+    nodeProcesser(nodes);
+    return max_nest;
 };
 
 export type ChartStyle = {
