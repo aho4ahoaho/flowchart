@@ -331,6 +331,7 @@ export type ChartStyle = {
     font: {
         family: string;
         size: number;
+        weight: string;
     };
 };
 
@@ -349,6 +350,7 @@ class ChartShape {
             font: {
                 family: style.font?.family ?? "serif",
                 size: style.font?.size ?? 20,
+                weight: style.font?.weight ?? "normal",
             },
         };
     }
@@ -370,7 +372,7 @@ class ChartShape {
         ctx.fillStyle = this.style.fillStyle;
         ctx.strokeStyle = this.style.strokeStyle;
         ctx.lineWidth = 2;
-        ctx.font = `${this.style.font.size}px ${this.style.font.family}`;
+        ctx.font = `${this.style.font.weight} ${this.style.font.size}px ${this.style.font.family}`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
     }

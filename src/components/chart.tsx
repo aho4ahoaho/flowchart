@@ -31,6 +31,7 @@ const defaultStyle: ChartStyle = {
     font: {
         family: "sans-serif",
         size: 20,
+        weight: "normal",
     },
 };
 

@@ -158,6 +158,15 @@ export const SettingsPanel = (props: Props) => {
                             setOption({ height: Number(e.target.value) });
                         }}
                     />
+                    <p>Margin</p>
+                    <input
+                        type="number"
+                        defaultValue={50}
+                        step={2}
+                        onChange={(e) => {
+                            setOption({ margin: Number(e.target.value) });
+                        }}
+                    />
                 </div>
                 <div className={style.column}>
                     <p className={style.label}>フォント設定</p>
@@ -181,6 +190,15 @@ export const SettingsPanel = (props: Props) => {
                             setStyle({
                                 font: { size: Number(e.target.value) },
                             });
+                        }}
+                    />
+                    <p>Weight</p>
+                    <PullDownList
+                        className={style.select}
+                        values={["normal", "bold"]}
+                        onChange={(value) => {
+                            if (!value) return;
+                            setStyle({ font: { weight: value } });
                         }}
                     />
                 </div>
