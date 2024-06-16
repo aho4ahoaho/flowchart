@@ -3,6 +3,8 @@ import style from "./codeManager.module.scss";
 import { japaneseDateFormat } from "@/logic/dateFormat";
 import { importLocalFile } from "@/logic/fileHandler";
 import React, { FormEvent } from "react";
+import { codeFormatter } from "@/logic/formatter";
+import { codeParser } from "@/logic/parser";
 
 type Props = {
     className?: string;
@@ -23,6 +25,17 @@ export const CodeManager = (props: Props) => {
     const [saveName, setSaveName] = React.useState<string>("");
     const [loadName, setLoadName] = React.useState<string>("");
     const [codeList, setCodeList] = React.useState<CodeList>({});
+
+    //コードのフォーマット
+    const onFormatClick = () => {
+        const { value, setValue } = props;
+        if (!value || !setValue) return;
+        const functions = codeParser(value);
+        console.log(functions);
+        const code = codeFormatter(functions);
+        console.log(code);
+        setValue(code);
+    };
 
     //ローカルストレージからコードリストを取得
     const getCodeList = () => {
@@ -87,6 +100,10 @@ export const CodeManager = (props: Props) => {
 
     return (
         <div className={props.className}>
+            <div className={style.section}>
+                <p className={style.label}>Code Manager</p>
+                <Button onClick={onFormatClick}>Format</Button>
+            </div>
             <div className={style.section}>
                 <p className={style.label}>Save</p>
                 <form onSubmit={saveData}>
