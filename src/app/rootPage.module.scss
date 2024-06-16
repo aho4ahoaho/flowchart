@@ -3,18 +3,22 @@ div.main {
     width: 100%;
     justify-content: space-around;
     flex-wrap: wrap;
-    padding: 1rem 0;
+
+    .leftPanel,
+    .rightPanel {
+        height: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
 
     .leftPanel {
         flex-basis: 300px;
         flex-grow: 2;
-        height: 100%;
     }
 
     .rightPanel {
         flex-basis: 300px;
         flex-grow: 7;
-        height: 100%;
         overflow-x: hidden;
     }
 }
