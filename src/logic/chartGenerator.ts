@@ -72,12 +72,13 @@ export const chartGenerator = (
     const chart = new ChartShape(ctx, style ?? {});
 
     // 開始記号を描画する
+    const funcName = func.args.length ? `${name}(${func.args})` : name;
     chart.terminator(
         size.offset.x,
         size.offset.y,
         size.width,
         size.height,
-        name,
+        funcName,
     );
     chart.arrow(
         size.offset.x + size.width / 2,

@@ -1,5 +1,6 @@
 export type FunctionItem = {
     name: string;
+    args: string;
     index: number;
     end: number;
     node: Item[];
